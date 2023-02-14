@@ -164,7 +164,7 @@ namespace Realta.Persistence.Repositories
                     new SqlCommandParameterModel() {
                     ParameterName = "@reme_status",
                     DataType = DbType.String,
-                    Value = restoMenus.reme_name
+                    Value = restoMenus.reme_status
                     },
                     new SqlCommandParameterModel() {
                     ParameterName = "@reme_mod",

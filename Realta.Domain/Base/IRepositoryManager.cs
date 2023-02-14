@@ -16,5 +16,7 @@ namespace Realta.Domain.Base
         IOrmeDetailRepository OrmeDetailRepository { get; }
 
         IOrderMenusRepository OrderMenusRepository { get; }
+
+        IMenuPhotosRepository MenuPhotosRepository { get; }
     }
 }

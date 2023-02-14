@@ -26,12 +26,12 @@ namespace Realta.Persistence.Repositories
                 "orme_order_date = @orme_order_date," +
                 "orme_total_item = @orme_total_item," +
                 "orme_total_discount = @orme_total_discount," +
-                "orme_total_amount = @orme_total_amount" +
-                "orme_pay_type = @orme_pay_type" +
-                "orme_cardnumber = @orme_cardnumber" +
-                "orme_is_paid = @orme_is_paid" +
-                "orme_modified_date = @orme_modified_date" +
-                "orme_user_id = @orme_user_id" +
+                "orme_total_amount = @orme_total_amount," +
+                "orme_pay_type = @orme_pay_type," +
+                "orme_cardnumber = @orme_cardnumber," +
+                "orme_is_paid = @orme_is_paid," +
+                "orme_modified_date = @orme_modified_date," +
+                "orme_user_id = @orme_user_id " +
                 "WHERE orme_id = @orme_id;",
 
                 CommandType = CommandType.Text,
@@ -131,7 +131,7 @@ namespace Realta.Persistence.Repositories
 
             return item;
         }
-             
+
         public OrderMenus FindOrderMenusById(int id)
         {
             SqlCommandModel model = new SqlCommandModel()
@@ -162,17 +162,98 @@ namespace Realta.Persistence.Repositories
 
         public void Insert(OrderMenus orderMenus)
         {
-            throw new NotImplementedException();
+            SqlCommandModel model = new SqlCommandModel()
+            {
+                CommandText = "INSERT INTO Resto.order_menus (orme_order_number, orme_order_date, orme_total_item, orme_total_discount, orme_total_amount, orme_pay_type, orme_cardnumber, orme_is_paid, orme_modified_date, orme_user_id) " +
+                "VALUES(@orme_order_number, @orme_order_date, @orme_total_item, @orme_total_discount, @orme_total_amount, @orme_pay_type, @orme_cardnumber, @orme_is_paid, @orme_modified_date, @orme_user_id)",
+
+                CommandType = CommandType.Text,
+                CommandParameters = new SqlCommandParameterModel[] {
+                    new SqlCommandParameterModel() {
+                        ParameterName = "@orme_order_number",
+                        DataType = DbType.String,
+                        Value = orderMenus.orme_order_number
+                    },
+                    new SqlCommandParameterModel() {
+                        ParameterName = "@orme_order_date",
+                        DataType = DbType.DateTime,
+                        Value = orderMenus.orme_order_date
+                    },
+                    new SqlCommandParameterModel() {
+                        ParameterName = "@orme_total_item",
+                        DataType = DbType.Int16,
+                        Value = orderMenus.orme_total_item
+                    },
+                    new SqlCommandParameterModel() {
+                        ParameterName = "@orme_total_discount",
+                        DataType = DbType.Decimal,
+                        Value = orderMenus.orme_total_discount
+                    },
+                    new SqlCommandParameterModel() {
+                        ParameterName = "@orme_total_amount",
+                        DataType = DbType.Decimal,
+                        Value = orderMenus.orme_total_amount
+                    },
+                    new SqlCommandParameterModel() {
+                        ParameterName = "@orme_pay_type",
+                        DataType = DbType.String,
+                        Value = orderMenus.orme_pay_type
+                    },
+                    new SqlCommandParameterModel() {
+                        ParameterName = "@orme_cardnumber",
+                        DataType = DbType.String,
+                        Value = orderMenus.orme_cardnumber
+                    },
+                    new SqlCommandParameterModel() {
+                        ParameterName = "@orme_is_paid",
+                        DataType = DbType.String,
+                        Value = orderMenus.orme_is_paid
+                    },
+                    new SqlCommandParameterModel() {
+                        ParameterName = "@orme_modified_date",
+                        DataType = DbType.DateTime,
+                        Value = orderMenus.orme_modified_date
+                    },
+                    new SqlCommandParameterModel() {
+                        ParameterName = "@orme_user_id",
+                        DataType = DbType.Int32,
+                        Value = orderMenus.orme_user_id
+                       }
+
+                }
+
+            };
+            _adoContext.ExecuteNonQuery(model);
+            _adoContext.Dispose();
         }
 
         public void Remove(OrderMenus orderMenus)
         {
-            throw new NotImplementedException();
+            SqlCommandModel model = new SqlCommandModel()
+            {
+                CommandText = "DELETE FROM Resto.order_menus WHERE orme_id = @orme_id;",
+                CommandType = CommandType.Text,
+                CommandParameters = new SqlCommandParameterModel[] {
+                    new SqlCommandParameterModel() {
+                        ParameterName = "@orme_id",
+                        DataType = DbType.Int32,
+                        Value = orderMenus.orme_id
+                }
+                }
+            };
+
+            _adoContext.ExecuteNonQuery(model);
+            _adoContext.Dispose();
         }
 
         public IEnumerable<OrderMenus> FindLastOrderMenusId()
         {
-            throw new NotImplementedException();
+            IEnumerator<OrderMenus> dataset = FindAll<OrderMenus>("SELECT * FROM Resto.order_menus where orme_id =(SELECT IDENT_CURRENT('Resto.order_menus'));");
+            while (dataset.MoveNext())
+            {
+                var data = dataset.Current;
+                yield return data;
+            }
         }
 
        

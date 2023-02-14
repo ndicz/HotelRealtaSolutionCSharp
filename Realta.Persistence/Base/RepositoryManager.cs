@@ -17,6 +17,7 @@ namespace Realta.Persistence.Base
         private IRestoMenusRepository _restoMenusRepository;
         private IOrmeDetailRepository _ormeDetailRepository;
         private IOrderMenusRepository _orderMenusRepository;
+        private IMenuPhotosRepository _menuPhotosRepository;
 
         public RepositoryManager()
         {
@@ -77,6 +78,20 @@ namespace Realta.Persistence.Base
                 }
 
                 return _orderMenusRepository;
+            }
+        }
+
+        public IMenuPhotosRepository MenuPhotosRepository
+        {
+
+            get
+            {
+                if (_menuPhotosRepository == null)
+                {
+                    _menuPhotosRepository = new MenuPhotosRepository(_adoContext);
+                }
+
+                return _menuPhotosRepository;
             }
         }
     }
