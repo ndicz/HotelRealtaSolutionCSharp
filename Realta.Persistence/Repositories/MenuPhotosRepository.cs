@@ -33,7 +33,7 @@ namespace Realta.Persistence.Repositories
                     new SqlCommandParameterModel() {
                         ParameterName = "@remp_thumbnail_filename",
                         DataType = DbType.String,
-                        Value = menuPhotos.remp_photo_filename
+                        Value = menuPhotos.remp_thumbnail_filename
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@remp_photo_filename",
@@ -178,7 +178,7 @@ namespace Realta.Persistence.Repositories
         {
             SqlCommandModel model = new SqlCommandModel()
             {
-                CommandText = "DELETE FROM Resto.resto_menus_photos WHERE remp_id = @remp_id;",
+                CommandText = "DELETE FROM Resto.resto_menu_photos WHERE remp_id = @remp_id;",
                 CommandType = CommandType.Text,
                 CommandParameters = new SqlCommandParameterModel[] {
                     new SqlCommandParameterModel() {
