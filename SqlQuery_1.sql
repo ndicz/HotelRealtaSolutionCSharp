@@ -1,0 +1,6 @@
+﻿SELECT DATA_TYPE, column_name, IS_NULLABLE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'resto_menus';
+
+select * from resto.order_menus;
+
+SELECT DATA_TYPE, column_name, IS_NULLABLE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'order_menus';
+
