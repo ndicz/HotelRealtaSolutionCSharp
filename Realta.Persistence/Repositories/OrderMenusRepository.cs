@@ -164,16 +164,11 @@ namespace Realta.Persistence.Repositories
         {
             SqlCommandModel model = new SqlCommandModel()
             {
-                CommandText = "INSERT INTO Resto.order_menus (orme_order_number, orme_order_date, orme_total_item, orme_total_discount, orme_total_amount, orme_pay_type, orme_cardnumber, orme_is_paid, orme_modified_date, orme_user_id) " +
-                "VALUES(@orme_order_number, @orme_order_date, @orme_total_item, @orme_total_discount, @orme_total_amount, @orme_pay_type, @orme_cardnumber, @orme_is_paid, @orme_modified_date, @orme_user_id)",
+                CommandText = "INSERT INTO Resto.order_menus (orme_order_date, orme_total_item, orme_total_discount, orme_total_amount, orme_pay_type, orme_cardnumber, orme_is_paid, orme_modified_date, orme_user_id)" +
+                "VALUES(@orme_order_date, @orme_total_item, @orme_total_discount, @orme_total_amount, @orme_pay_type, @orme_cardnumber, @orme_is_paid, @orme_modified_date, @orme_user_id)",
 
                 CommandType = CommandType.Text,
                 CommandParameters = new SqlCommandParameterModel[] {
-                    new SqlCommandParameterModel() {
-                        ParameterName = "@orme_order_number",
-                        DataType = DbType.String,
-                        Value = orderMenus.orme_order_number
-                    },
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_order_date",
                         DataType = DbType.DateTime,

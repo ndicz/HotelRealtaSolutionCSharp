@@ -88,8 +88,6 @@ namespace Realta.WebAPI.Controllers
 
             var orderMenus = new OrderMenus()
             {
-                //orme_id = orderMenusDto.orme_id,
-                orme_order_number = orderMenusDto.orme_order_number,
                 orme_order_date = orderMenusDto.orme_order_date,
                 orme_total_item = orderMenusDto.orme_total_item,
                 orme_total_discount = orderMenusDto.orme_total_discount,

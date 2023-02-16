@@ -9,7 +9,8 @@ namespace Realta.Contract
     public class OrderMenusDto
     {
         public int orme_id { get; set; }
-        public string orme_order_number { get; set; }
+
+        public string? orme_order_number { get; set; }
         public DateTime orme_order_date { get; set; }
         public short orme_total_item { get; set; }
         public decimal orme_total_discount { get; set; }
