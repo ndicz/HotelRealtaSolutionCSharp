@@ -238,7 +238,7 @@ namespace Realta.Persistence.Repositories
             };
 
             _adoContext.ExecuteNonQuery(model);
-            _adoContext.Dispose();
+            _adoContext.Dispose();// membersihkan resource dan close connection
         }
 
         public IEnumerable<OrderMenus> FindLastOrderMenusId()

@@ -12,7 +12,7 @@ namespace Realta.Domain.Entities
     public class MenuPhotos
     {
         [Key]
-        public int remp_id { get; set; } 
+        public int remp_id  { get; set; } 
         public string remp_thumbnail_filename { get; set; }
         public string remp_photo_filename { get; set; }
         public bool remp_primary { get; set; }

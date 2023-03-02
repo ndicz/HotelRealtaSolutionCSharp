@@ -14,12 +14,15 @@ namespace Realta.Domain.Entities
         
 
         [Key]
+       
         public int orme_id { get; set; }
-        public string orme_order_number { get; set; }
-        public DateTime orme_order_date { get; set; }
+
+        public string? orme_order_number { get; set; }
+        public DateTime orme_order_date { get; set; } //dia aliaskan dengan as
         public short orme_total_item { get; set; }
         public decimal orme_total_discount { get; set; }
         public decimal orme_total_amount { get; set; }
+
         public string orme_pay_type { get; set; }
         public string? orme_cardnumber { get; set; }
         public string orme_is_paid { get; set; }

@@ -21,7 +21,7 @@ namespace Realta.Persistence.RepositoryContext
         {
             _sqlConnection = new SqlConnection(sqlConnection);
         }
-
+        //koneksi terjadi pada saat di inisialisasi di konstruktor
         public void Dispose()
         {
             Dispose(_isDisposed);

@@ -16,5 +16,7 @@ namespace Realta.Domain.Repositories
         void Edit(RestoMenus restoMenus);   
         void Remove(RestoMenus restoMenus);
         IEnumerable<RestoMenus> FindLastMenusId();
+
+        int GetIdSequence();
     }
 }

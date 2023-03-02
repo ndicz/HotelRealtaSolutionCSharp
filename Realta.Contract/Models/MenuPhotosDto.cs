@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Realta.Contract
+namespace Realta.Contract.Models
 {
     public class MenuPhotosDto
     {
 
-        public int remp_id { get; set; }
-        public string remp_thumbnail_filename { get; set; }
-        public string remp_photo_filename { get; set; }
+        public int RempId { get; set; }
+
+        public string RempThumbnailFilename { get; set; }
+        public string RempPhotoFilename { get; set; }
         public bool remp_primary { get; set; }
         public string remp_url { get; set; }
         public int remp_reme_id { get; set; }

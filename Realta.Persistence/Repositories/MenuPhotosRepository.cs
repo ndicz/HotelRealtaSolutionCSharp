@@ -28,7 +28,7 @@ namespace Realta.Persistence.Repositories
               "remp_reme_id = @remp_reme_id " +
               " WHERE remp_id = @remp_id;",
 
-                CommandType = CommandType.Text,
+                CommandType = CommandType.StoredProcedure,
                 CommandParameters = new SqlCommandParameterModel[] {
                     new SqlCommandParameterModel() {
                         ParameterName = "@remp_thumbnail_filename",

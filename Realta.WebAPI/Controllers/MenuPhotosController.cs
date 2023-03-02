@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Realta.Contract;
+using Realta.Contract.Models;
 using Realta.Domain.Base;
 using Realta.Domain.Entities;
 using Realta.Services.Abstraction;
@@ -31,9 +31,9 @@ namespace Realta.WebAPI.Controllers
             var menuPhotosDto = menuPhotos.Select(r => new MenuPhotosDto
             {
 
-            remp_id = r.remp_id,
-            remp_thumbnail_filename = r.remp_thumbnail_filename,
-            remp_photo_filename = r.remp_photo_filename,
+            RempId = r.remp_id,
+            RempThumbnailFilename = r.remp_thumbnail_filename,
+            RempPhotoFilename = r.remp_photo_filename,
             remp_primary = r.remp_primary,
             remp_url = r.remp_url,  
             remp_reme_id = r.remp_reme_id
@@ -56,9 +56,9 @@ namespace Realta.WebAPI.Controllers
             }
             var menuPhotsDto = new MenuPhotosDto
             {
-                remp_id = photos.remp_id,
-                remp_thumbnail_filename = photos.remp_thumbnail_filename,
-                remp_photo_filename = photos.remp_photo_filename,
+                RempId = photos.remp_id,
+                RempThumbnailFilename = photos.remp_thumbnail_filename,
+                RempPhotoFilename = photos.remp_photo_filename,
                 remp_primary = photos.remp_primary,
                 remp_url = photos.remp_url,
                 remp_reme_id = photos.remp_reme_id
@@ -78,9 +78,9 @@ namespace Realta.WebAPI.Controllers
             }
             var menuPhotos = new MenuPhotos()
             {
-                remp_id = menuPhotosDto.remp_id,
-                remp_thumbnail_filename = menuPhotosDto.remp_thumbnail_filename,
-                remp_photo_filename = menuPhotosDto.remp_photo_filename,
+                remp_id = menuPhotosDto.RempId,
+                remp_thumbnail_filename = menuPhotosDto.RempThumbnailFilename,
+                remp_photo_filename = menuPhotosDto.RempPhotoFilename,
                 remp_primary = menuPhotosDto.remp_primary,
                 remp_url = menuPhotosDto.remp_url,
                 remp_reme_id = menuPhotosDto.remp_reme_id
@@ -108,20 +108,20 @@ namespace Realta.WebAPI.Controllers
             var res = new MenuPhotos
             {
                 remp_id = id,
-                remp_thumbnail_filename = menuPhotosDto.remp_thumbnail_filename,
-                remp_photo_filename = menuPhotosDto.remp_photo_filename,
+                remp_thumbnail_filename = menuPhotosDto.RempThumbnailFilename,
+                remp_photo_filename = menuPhotosDto.RempPhotoFilename,
                 remp_primary = menuPhotosDto.remp_primary,
                 remp_url = menuPhotosDto.remp_url,
                 remp_reme_id = menuPhotosDto.remp_reme_id
 
             };
             _repositoryManager.MenuPhotosRepository.Edit(res);
-            return CreatedAtRoute("GetMenuPhotosID", new { id = menuPhotosDto.remp_id }, new MenuPhotosDto
+            return CreatedAtRoute("GetMenuPhotosID", new { id = menuPhotosDto.RempId }, new MenuPhotosDto
             {
 
-                remp_id = id,
-                remp_thumbnail_filename = res.remp_thumbnail_filename,
-                remp_photo_filename = res.remp_photo_filename,
+                RempId = id,
+                RempThumbnailFilename = res.remp_thumbnail_filename,
+                RempPhotoFilename = res.remp_photo_filename,
                 remp_primary = res.remp_primary,
                 remp_url = res.remp_url,
                 remp_reme_id = res.remp_reme_id

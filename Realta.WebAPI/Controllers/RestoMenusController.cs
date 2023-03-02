@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Realta.Contract;
+using Realta.Contract.Models;
 using Realta.Domain.Base;
 using Realta.Domain.Entities;
 using Realta.Services.Abstraction;
@@ -33,13 +33,14 @@ namespace Realta.WebAPI.Controllers
             {
 
 
-                reme_id = r.reme_id,
-                reme_faci_id = r.reme_faci_id,
-                reme_name = r.reme_name,
-                reme_description = r.reme_description,
-                reme_price = r.reme_price,
-                reme_status = r.reme_status,
-                reme_modified_date = r.reme_modified_date
+                RemeId = r.RemeId,
+                RemeFaciId = r.RemeFaciId,
+                RemeName = r.RemeName,
+                RemeDescription = r.RemeDescription,
+                RemePrice = r.RemePrice,
+                RemeStatus = r.RemeStatus,
+                RemeModifiedDate = r.RemeModifiedDate,
+                RemeType = r.RemeType
             });
 
 
@@ -60,13 +61,14 @@ namespace Realta.WebAPI.Controllers
 
             var restoMenusDto = new RestoMenusDto
             {
-                reme_id = resto.reme_id,
-                reme_faci_id = resto.reme_faci_id,
-                reme_name = resto.reme_name,
-                reme_description = resto.reme_description,
-                reme_price = resto.reme_price,
-                reme_status = resto.reme_status,
-                reme_modified_date = resto.reme_modified_date
+                RemeId = resto.RemeId,
+                RemeFaciId = resto.RemeFaciId,
+                RemeName = resto.RemeName,
+                RemeDescription = resto.RemeDescription,
+                RemePrice = resto.RemePrice,
+                RemeStatus = resto.RemeStatus,
+                RemeModifiedDate = resto.RemeModifiedDate,
+                RemeType = resto.RemeType
 
             };
             return Ok(restoMenusDto);
@@ -85,12 +87,13 @@ namespace Realta.WebAPI.Controllers
 
             var restoMenus = new RestoMenus()
             {
-                reme_faci_id = 2,
-                reme_name = restoMenusDto.reme_name,
-                reme_description = restoMenusDto.reme_description,
-                reme_price = restoMenusDto.reme_price,
-                reme_status = restoMenusDto.reme_status,
-                reme_modified_date = restoMenusDto.reme_modified_date
+                RemeFaciId = 2,
+                RemeName = restoMenusDto.RemeName,
+                RemeDescription = restoMenusDto.RemeDescription,
+                RemePrice = restoMenusDto.RemePrice,
+                RemeStatus = restoMenusDto.RemeStatus,
+                RemeModifiedDate = restoMenusDto.RemeModifiedDate,
+                RemeType = restoMenusDto.RemeType
             };
 
             _repositoryManager.RestoMenusRepository.Insert(restoMenus);
@@ -114,24 +117,24 @@ namespace Realta.WebAPI.Controllers
             }
             var res = new RestoMenus
             {
-                reme_id = id,
-                reme_name = restoMenusDto.reme_name,
-                reme_description = restoMenusDto.reme_description,
-                reme_price = restoMenusDto.reme_price,
-                reme_status = restoMenusDto.reme_status,
-                reme_modified_date = restoMenusDto.reme_modified_date
+                RemeId = id,
+                RemeName = restoMenusDto.RemeName,
+                RemeDescription = restoMenusDto.RemeDescription,
+                RemePrice = restoMenusDto.RemePrice,
+                RemeStatus = restoMenusDto.RemeStatus,
+                RemeModifiedDate = restoMenusDto.RemeModifiedDate
 
             };
             _repositoryManager.RestoMenusRepository.Edit(res);
-            return CreatedAtRoute("GetRestoMenusID", new { id = restoMenusDto.reme_id }, new RestoMenusDto
+            return CreatedAtRoute("GetRestoMenusID", new { id = restoMenusDto.RemeId }, new RestoMenusDto
             {
 
-                reme_id = id,
-                reme_name = res.reme_name,
-                reme_description = res.reme_description,
-                reme_price = res.reme_price,
-                reme_status = res.reme_status,
-                reme_modified_date = res.reme_modified_date
+                RemeId = id,
+                RemeName = res.RemeName,
+                RemeDescription = res.RemeDescription,
+                RemePrice = res.RemePrice,
+                RemeStatus = res.RemeStatus,
+                RemeModifiedDate = res.RemeModifiedDate
 
 
             });

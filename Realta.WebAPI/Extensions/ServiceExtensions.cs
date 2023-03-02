@@ -1,4 +1,6 @@
-﻿using Realta.Domain.Base;
+﻿using Realta.Services.Abstraction;
+using Realta.Services;
+using Realta.Domain.Base;
 using Realta.Persistence.Base;
 using Realta.Persistence.RepositoryContext;
 using Realta.Services;
@@ -32,6 +34,11 @@ namespace Realta.WebAPI.Extensions
 
         public static void ConfigureDbContext(this IServiceCollection services, IConfiguration configuration) =>
            services.AddSingleton(new AdoDbContext(configuration.GetConnectionString("development")));
+
+        public static void ConfigureUtitlityService(this IServiceCollection services) =>
+           services.AddScoped<IUtilityService, UtilityService>();
+
+        //addsingleton
 
     }
 }
