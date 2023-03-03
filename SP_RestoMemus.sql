@@ -1,25 +1,8 @@
-﻿CREATE TRIGGER trg_update_order_menus_total_item
-ON Resto.order_menu_detail
-AFTER INSERT, UPDATE, DELETE
-AS
-BEGIN
-    DECLARE @orme_id int;
-    SET @orme_id = (SELECT DISTINCT omde_orme_id FROM inserted);
-    IF @orme_id IS NOT NULL
-    BEGIN
-        UPDATE Resto.order_menus
-        SET orme_total_item = (SELECT SUM(orme_qty) FROM Resto.order_menu_detail WHERE omde_orme_id = @orme_id),
-            orme_total_discount = (SELECT SUM(orme_discount) FROM Resto.order_menu_detail WHERE omde_orme_id = @orme_id),
-            orme_total_amount = (SELECT SUM(orme_subtotal) - SUM(orme_discount)  FROM Resto.order_menu_detail WHERE omde_orme_id = @orme_id),
-            orme_modified_date = GETDATE()
-        WHERE orme_id = @orme_id;
-    END
-END
-go
+﻿
 
 drop procedure  Resto.create_order_menu_detail;
 
---SP BARU
+--SP BARU----------------------------------------------------------------------------------------------------------------
 
 CREATE PROCEDURE create_order_menu_detail
   @omde_reme_id INT,
@@ -80,3 +63,42 @@ BEGIN
     VALUES (@orme_price, @orme_qty, @orme_discount, @orme_id, @omde_reme_id);
   END
 END
+
+----------------------------------------------------------------------------------------------------------------
+
+--SP UPDATEMENU
+
+drop procedure Resto_UpdateRestoMenus;
+
+CREATE PROCEDURE Resto.SpUpdateRestoMenus
+    @reme_id int,
+    @reme_name varchar(50),
+    @reme_desc varchar(100),
+    @reme_price decimal(10,2),
+    @reme_status bit,
+    @reme_mod datetime
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    BEGIN TRANSACTION; -- memulai transaction
+
+    BEGIN TRY
+        UPDATE Resto.resto_menus 
+        SET reme_name = @reme_name,
+            reme_description = @reme_desc,
+            reme_price = @reme_price,
+            reme_status = @reme_status,
+            reme_modified_date = @reme_mod
+        WHERE reme_id = @reme_id;
+
+        COMMIT TRANSACTION; -- commit transaction jika tidak ada error
+    END TRY
+
+    BEGIN CATCH
+        ROLLBACK TRANSACTION; -- rollback transaction jika terjadi error
+        THROW;
+    END CATCH
+END
+
+

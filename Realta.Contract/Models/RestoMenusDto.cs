@@ -16,7 +16,7 @@ namespace Realta.Contract.Models
         [DisplayFormat(DataFormatString = "{0:n2}")]
         public decimal RemePrice { get; set; }
         public string RemeStatus { get; set; }
-        public DateTime RemeModifiedDate { get; set; }
+        public DateTime RemeModifiedDate { get; set; } = DateTime.Now;
 
         public string RemeType { get; set; }
     }

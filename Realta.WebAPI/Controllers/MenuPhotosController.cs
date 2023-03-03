@@ -34,7 +34,7 @@ namespace Realta.WebAPI.Controllers
             RempId = r.remp_id,
             RempThumbnailFilename = r.remp_thumbnail_filename,
             RempPhotoFilename = r.remp_photo_filename,
-            remp_primary = r.remp_primary,
+            RempPrimary = r.remp_primary,
             remp_url = r.remp_url,  
             remp_reme_id = r.remp_reme_id
            
@@ -59,7 +59,7 @@ namespace Realta.WebAPI.Controllers
                 RempId = photos.remp_id,
                 RempThumbnailFilename = photos.remp_thumbnail_filename,
                 RempPhotoFilename = photos.remp_photo_filename,
-                remp_primary = photos.remp_primary,
+                RempPrimary = photos.remp_primary,
                 remp_url = photos.remp_url,
                 remp_reme_id = photos.remp_reme_id
 
@@ -81,7 +81,7 @@ namespace Realta.WebAPI.Controllers
                 remp_id = menuPhotosDto.RempId,
                 remp_thumbnail_filename = menuPhotosDto.RempThumbnailFilename,
                 remp_photo_filename = menuPhotosDto.RempPhotoFilename,
-                remp_primary = menuPhotosDto.remp_primary,
+                remp_primary = menuPhotosDto.RempPrimary,
                 remp_url = menuPhotosDto.remp_url,
                 remp_reme_id = menuPhotosDto.remp_reme_id
             };
@@ -110,7 +110,7 @@ namespace Realta.WebAPI.Controllers
                 remp_id = id,
                 remp_thumbnail_filename = menuPhotosDto.RempThumbnailFilename,
                 remp_photo_filename = menuPhotosDto.RempPhotoFilename,
-                remp_primary = menuPhotosDto.remp_primary,
+                remp_primary = menuPhotosDto.RempPrimary,
                 remp_url = menuPhotosDto.remp_url,
                 remp_reme_id = menuPhotosDto.remp_reme_id
 
@@ -122,7 +122,7 @@ namespace Realta.WebAPI.Controllers
                 RempId = id,
                 RempThumbnailFilename = res.remp_thumbnail_filename,
                 RempPhotoFilename = res.remp_photo_filename,
-                remp_primary = res.remp_primary,
+                RempPrimary = res.remp_primary,
                 remp_url = res.remp_url,
                 remp_reme_id = res.remp_reme_id
 

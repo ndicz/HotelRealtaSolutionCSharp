@@ -15,11 +15,13 @@ namespace Realta.WebAPI.Controllers
 
         private readonly IRepositoryManager _repositoryManager;
         private readonly ILoggerManager _logger;
+        private readonly IServiceManager _serviceManager;
 
-        public RestoMenusController(IRepositoryManager repositoryManager, ILoggerManager logger)
+        public RestoMenusController(IRepositoryManager repositoryManager, ILoggerManager logger, IServiceManager serviceManager)
         {
             _repositoryManager = repositoryManager;
             _logger = logger;
+            _serviceManager = serviceManager;
         }
 
 
@@ -165,6 +167,58 @@ namespace Realta.WebAPI.Controllers
             _repositoryManager.RestoMenusRepository.Remove(res);
             return Ok("Data has been remove.");
 
+        }
+
+
+
+        [HttpPost("createMenusAndUpload"), DisableRequestSizeLimit]
+        public async Task<IActionResult> CreateMenuPhotos()
+        {
+            //1. declare formCollection to hold form-data
+            var formColletion = await Request.ReadFormAsync();
+
+            //2. extract files to variable files
+            var files = formColletion.Files;
+
+            //3. hold each ouput formCollection to each variable
+            formColletion.TryGetValue("RemeName", out var remeName);
+            formColletion.TryGetValue("RemeDescription", out var remeDescription);
+            formColletion.TryGetValue("RemePrice", out var remePrice);
+            formColletion.TryGetValue("RemeStatus", out var remeStatus);
+            formColletion.TryGetValue("RemeType", out var remeType);
+         
+            //4. declare variable and store in object 
+            var menuCreateDto = new RestoMenusDto
+            {
+                RemeName = remeName.ToString(),
+                RemeDescription = remeDescription.ToString(),
+                RemePrice = decimal.Parse(remePrice.ToString()),
+                RemeStatus = remeStatus.ToString(),
+                RemeType = remeType.ToString()
+            };
+
+            //5. store to list
+            var allPhotos = new List<IFormFile>();
+            foreach (var item in files)
+            {
+                allPhotos.Add(item);
+            }
+
+            //6. declare variable productphotogroup
+            var menuPhotoGroup = new MenuPhotosGroupDto
+            {
+                MenuPhotosCreateDto = menuCreateDto,
+                AllPhotos = allPhotos
+            };
+
+            if (menuPhotoGroup != null)
+            {
+                _serviceManager.MenuPhotosServices.InsertPhotoAndMenu(menuPhotoGroup, out var RemeId);
+                var productResult = _repositoryManager.RestoMenusRepository.FindRestoById(RemeId);
+                return Ok(productResult);
+            }
+
+            return BadRequest();
         }
     }
 }

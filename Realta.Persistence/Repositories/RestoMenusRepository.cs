@@ -21,14 +21,16 @@ namespace Realta.Persistence.Repositories
         {
             SqlCommandModel model = new SqlCommandModel()
             {
-                CommandText = "UPDATE Resto.resto_menus set  reme_name = @reme_name," +
-                "reme_description = @reme_desc," +
-                "reme_price = @reme_price," +
-                "reme_status = @reme_status," +
-                "reme_modified_date =" +
-                " @reme_mod WHERE reme_id = @reme_id;",
+                //CommandText = "UPDATE Resto.resto_menus set  reme_name = @reme_name," +
+                //"reme_description = @reme_desc," +
+                //"reme_price = @reme_price," +
+                //"reme_status = @reme_status," +
+                //"reme_modified_date =" +
+                //" @reme_mod WHERE reme_id = @reme_id;",
 
-                CommandType = CommandType.Text,
+                CommandText = "Resto.SpUpdateRestoMenus",
+
+                CommandType = CommandType.StoredProcedure,
                 CommandParameters = new SqlCommandParameterModel[] {
                     new SqlCommandParameterModel() {
                         ParameterName = "@reme_name",
@@ -71,19 +73,24 @@ namespace Realta.Persistence.Repositories
 
         public IEnumerable<RestoMenus> FindAllRestoMenus()
         {
-            //IEnumerator<RestoMenus> dataSet = FindAll<RestoMenus>("SELECT  * From Resto.resto_menus");
+            IEnumerator<RestoMenus> dataSet = FindAll<RestoMenus>("Select reme_faci_id RemeFaciId, " +
+                "reme_id RemeId, reme_name RemeName, " +
+                "reme_description RemeDescription, " +
+                "reme_price RemePrice, reme_status RemeStatus, " +
+                "reme_modified_date RemeModifiedDate, " +
+                "reme_type Remetype from Resto.resto_menus");
 
-            //while (dataSet.MoveNext())
-            //{
-            //    var data = dataSet.Current;
-            //    yield return data;
-            //}
+            while (dataSet.MoveNext())
+            {
+                var data = dataSet.Current;
+                yield return data;
+            }
 
-            var dataSet = GetAll<RestoMenus>("SELECT  * From Resto.resto_menus");
+            //var dataSet = GetAll<RestoMenus>("SELECT  * From Resto.resto_menus");
 
             //return dataSet.ToList();
 
-            return GetAll<RestoMenus>("SELECT  * From Resto.resto_menus");
+            //return GetAll<RestoMenus>("SELECT  * From Resto.resto_menus");
         }
 
         public async Task<IEnumerable<RestoMenus>> FindAllRestoAsync()
@@ -120,7 +127,7 @@ namespace Realta.Persistence.Repositories
                 "reme_description RemeDescription, " +
                 "reme_price RemePrice, reme_status RemeStatus, " +
                 "reme_modified_date RemeModifiedDate, " +
-                "reme_type Remetype from Resto.resto_menus where reme_id=@reme_id order by reme_id asc;",
+                "reme_type RemeType from Resto.resto_menus where reme_id=@reme_id order by reme_id asc;",
                 CommandType = CommandType.Text,
                 CommandParameters = new SqlCommandParameterModel[] {
                     new SqlCommandParameterModel() {

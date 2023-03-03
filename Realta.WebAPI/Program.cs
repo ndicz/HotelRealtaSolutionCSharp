@@ -17,6 +17,7 @@ internal class Program
         builder.Services.ConfigureDbContext(builder.Configuration);
         builder.Services.ConfigureRepositoryManager();
         builder.Services.ConfigureUtitlityService();
+        builder.Services.ConfigureServiceManager();
         builder.Services.ConfigureLoggerService();
 
 

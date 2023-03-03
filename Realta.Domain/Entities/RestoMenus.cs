@@ -13,7 +13,7 @@ namespace Realta.Domain.Entities
     public class RestoMenus
     {
         [Key]
-        public int RemeFaciId { get; set; }
+        public int RemeFaciId { get; set; } = 2;
         public int RemeId { get; set; }
         public string RemeName { get; set; }
         public string RemeDescription { get; set; }  

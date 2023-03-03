@@ -38,6 +38,10 @@ namespace Realta.WebAPI.Extensions
         public static void ConfigureUtitlityService(this IServiceCollection services) =>
            services.AddScoped<IUtilityService, UtilityService>();
 
+        public static void ConfigureServiceManager(this IServiceCollection services) =>
+           services.AddScoped<IServiceManager, ServiceManager>();
+
+
         //addsingleton
 
     }
