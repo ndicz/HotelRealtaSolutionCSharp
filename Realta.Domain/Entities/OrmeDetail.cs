@@ -19,5 +19,8 @@ namespace Realta.Domain.Entities
            public decimal orme_discount { get; set; }
            public int omde_orme_id { get; set; }
            public int omde_reme_id { get; set; }
+            
+        public string? reme_name { get; set; }
+
     }
 }

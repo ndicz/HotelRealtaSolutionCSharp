@@ -102,3 +102,50 @@ BEGIN
 END
 
 
+--------SP NESTED JOIN 
+ 
+drop procedure GetOrderMenusWithDetailsById
+
+CREATE PROCEDURE GetOrderMenusWithDetailsById
+    @orme_id INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SET XACT_ABORT ON;
+    
+    SELECT Resto.order_menus.orme_id, Resto.order_menus.orme_order_number,
+           Resto.order_menu_detail.omde_id, Resto.order_menu_detail.orme_price, 
+           Resto.order_menu_detail.orme_qty, Resto.order_menu_detail.orme_subtotal, 
+           Resto.order_menu_detail.orme_discount, Resto.order_menu_detail.omde_orme_id, 
+           Resto.order_menu_detail.omde_reme_id
+    FROM Resto.order_menus
+    JOIN Resto.order_menu_detail ON Resto.order_menus.orme_id = Resto.order_menu_detail.omde_orme_id
+    WHERE Resto.order_menus.orme_id = @orme_id OR @orme_id IS NULL;
+END
+
+EXEC GetOrderMenusWithDetailsById @orme_id = NUll
+
+
+------------------BARU SP UNTUK JOIN
+
+drop procedure GetOrderMenusWithDetailsById
+
+CREATE PROCEDURE GetOrderMenusWithDetailsById
+    @orme_id INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SET XACT_ABORT ON;
+    
+    SELECT Resto.order_menus.orme_id, Resto.order_menus.orme_order_number,
+           Resto.order_menus.orme_total_amount, Resto.order_menus.orme_total_discount,
+           Resto.order_menu_detail.omde_id, Resto.order_menu_detail.orme_price, 
+           Resto.order_menu_detail.orme_qty, Resto.order_menu_detail.orme_subtotal, 
+           Resto.order_menu_detail.orme_discount, Resto.order_menu_detail.omde_orme_id, 
+           Resto.order_menu_detail.omde_reme_id, Resto.resto_menus.reme_name
+    FROM Resto.order_menus
+    JOIN Resto.order_menu_detail ON Resto.order_menus.orme_id = Resto.order_menu_detail.omde_orme_id
+    JOIN Resto.resto_menus ON Resto.order_menu_detail.omde_reme_id = Resto.resto_menus.reme_id
+    WHERE Resto.order_menus.orme_id = @orme_id OR @orme_id IS NULL;
+END
+

@@ -1,4 +1,5 @@
-﻿using Realta.Domain.Entities;
+﻿using Realta.Domain.Dto;
+using Realta.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,7 @@ namespace Realta.Domain.Repositories
         void Edit(OrderMenus orderMenus);
         void Remove(OrderMenus orderMenus);
         IEnumerable<OrderMenus> FindLastOrderMenusId();
+
+        OrderMenusNestedMenusDetail GetOrmeNestedMenuDetail (int id);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Realta.Domain.Entities;
+﻿using Realta.Domain.Dto;
+using Realta.Domain.Entities;
 using Realta.Domain.Repositories;
 using Realta.Persistence.Base;
 using Realta.Persistence.RepositoryContext;
@@ -251,6 +252,53 @@ namespace Realta.Persistence.Repositories
             }
         }
 
-       
+        public OrderMenusNestedMenusDetail GetOrmeNestedMenuDetail(int id)
+        {
+            SqlCommandModel model = new SqlCommandModel()
+            {
+                CommandText = "GetOrderMenusWithDetailsById",
+                CommandType = CommandType.StoredProcedure,
+                CommandParameters = new SqlCommandParameterModel[] {
+
+                    new SqlCommandParameterModel()
+                    {
+                        ParameterName = "@orme_id",
+                        DataType = DbType.Int32,
+                        Value = id
+                    }
+                }
+            };
+
+            var dataSet = FindByCondition<OrderMenusJoinMenusDetail>(model);
+            var listData = new List<OrderMenusJoinMenusDetail>();
+            while (dataSet.MoveNext())
+            {
+                listData.Add(dataSet.Current);
+            }
+            var orderMenus = listData.Select(x => new { x.orme_id, x.orme_order_number, x.orme_total_amount, x.orme_total_discount, x.reme_name }).FirstOrDefault();
+
+            var orderDetail = listData.Select(x => new OrmeDetail
+            {
+                omde_id = x.omde_id,
+                orme_price = x.orme_price,
+                orme_qty = x.orme_qty,
+                orme_subtotal = x.orme_subtotal,
+                omde_orme_id = x.omde_orme_id,
+                omde_reme_id = x.omde_reme_id,
+                reme_name = x.reme_name
+            });
+
+            var nestedJson = new OrderMenusNestedMenusDetail
+            {
+                orme_id = orderMenus.orme_id,
+                orme_order_number = orderMenus.orme_order_number,
+                orme_total_amount = orderMenus.orme_total_amount,
+                orme_total_discount = orderMenus.orme_total_discount,
+                MenuDetail = orderDetail.ToList()
+            };
+
+            return nestedJson;
+
+        }
     }
 }

@@ -46,6 +46,17 @@ namespace Realta.WebAPI.Controllers
             return Ok(orderMenus);
         }
 
+        //GET NESTED
+
+        [HttpGet("js/{id}", Name = "GetOrderMenusNestJson")]
+        public IActionResult FindOrderJson(int id)
+        {
+            var orderMenus = _repositoryManager.OrderMenusRepository.GetOrmeNestedMenuDetail(id);
+            return Ok(orderMenus);
+        }
+
+
+
         // GET api/<OrderMenusController>/5
         [HttpGet("{id}", Name = "GetOrderMenusID")]
         public IActionResult FIndOrderMenusId(int id)
