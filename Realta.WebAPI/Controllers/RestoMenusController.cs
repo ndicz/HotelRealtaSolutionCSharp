@@ -39,7 +39,7 @@ namespace Realta.WebAPI.Controllers
                 RemeFaciId = r.RemeFaciId,
                 RemeName = r.RemeName,
                 RemeDescription = r.RemeDescription,
-                RemePrice = r.RemePrice,
+                RemePrice = r.RemePrice ,
                 RemeStatus = r.RemeStatus,
                 RemeModifiedDate = r.RemeModifiedDate,
                 RemeType = r.RemeType
