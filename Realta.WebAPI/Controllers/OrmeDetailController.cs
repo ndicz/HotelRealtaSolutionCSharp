@@ -32,13 +32,13 @@ namespace Realta.WebAPI.Controllers
             {
 
 
-                omde_id = r.omde_id,
-                orme_price = r.orme_price,
-                orme_qty = r.orme_qty,
-                orme_subtotal = r.orme_subtotal,
-                orme_discount = r.orme_discount,
-                omde_orme_id = r.omde_orme_id,
-                omde_reme_id = r.omde_reme_id
+                OmdeId = r.OmdeId,
+                OrmePrice = r.OrmePrice,
+                OrmeQty = r.OrmeQty,
+                OrmeSubtotal = r.OrmeSubtotal,
+                OrmeDiscount = r.OrmeDiscount,
+                OmdeOrmeId = r.OmdeOrmeId,
+                OmdeRemeId = r.OmdeRemeId
             });
 
 
@@ -58,13 +58,13 @@ namespace Realta.WebAPI.Controllers
 
             var ormeDetailDto = new OrmeDetailDto
             {
-                omde_id = ormeDetail.omde_id,
-                orme_price = ormeDetail.orme_price,
-                orme_qty = ormeDetail.orme_qty,
-                orme_subtotal = ormeDetail.orme_subtotal,
-                orme_discount = ormeDetail.orme_discount,
-                omde_orme_id = ormeDetail.omde_orme_id,
-                omde_reme_id = ormeDetail.omde_reme_id
+                OmdeId = ormeDetail.OmdeId,
+                OrmePrice = ormeDetail.OrmePrice,
+                OrmeQty = ormeDetail.OrmeQty,
+                OrmeSubtotal = ormeDetail.OrmeSubtotal,
+                OrmeDiscount = ormeDetail.OrmeDiscount,
+                OmdeOrmeId = ormeDetail.OmdeOrmeId,
+                OmdeRemeId = ormeDetail.OmdeRemeId
 
             };
             return Ok(ormeDetailDto);
@@ -83,12 +83,12 @@ namespace Realta.WebAPI.Controllers
 
             var ormeDetail = new OrmeDetail()
             {
-                orme_price = ormeDetailDto.orme_price,
-                orme_qty = ormeDetailDto.orme_qty,
-                orme_subtotal = ormeDetailDto.orme_subtotal,
-                orme_discount = ormeDetailDto.orme_discount,
-                omde_orme_id = ormeDetailDto.omde_orme_id,
-                omde_reme_id = ormeDetailDto.omde_reme_id
+                OrmePrice = ormeDetailDto.OrmePrice,
+                OrmeQty = ormeDetailDto.OrmeQty,
+                OrmeSubtotal = ormeDetailDto.OrmeSubtotal,
+                OrmeDiscount = ormeDetailDto.OrmeDiscount,
+                OmdeOrmeId = ormeDetailDto.OmdeOrmeId,
+                OmdeRemeId = ormeDetailDto.OmdeRemeId
             };
 
             _repositoryManager.OrmeDetailRepository.Insert(ormeDetail);
@@ -111,26 +111,26 @@ namespace Realta.WebAPI.Controllers
             }
             var res = new OrmeDetail
             {
-                omde_id = id,
-                orme_price = ormeDetailDto.orme_price,
-                orme_qty = ormeDetailDto.orme_qty,
-                orme_subtotal = ormeDetailDto.orme_subtotal,
-                orme_discount = ormeDetailDto.orme_discount,
-                omde_orme_id = ormeDetailDto.omde_orme_id,
-                omde_reme_id = ormeDetailDto.omde_reme_id
+                OmdeId = id,
+                OrmePrice = ormeDetailDto.OrmePrice,
+                OrmeQty = ormeDetailDto.OrmeQty,
+                OrmeSubtotal = ormeDetailDto.OrmeSubtotal,
+                OrmeDiscount = ormeDetailDto.OrmeDiscount,
+                OmdeOrmeId = ormeDetailDto.OmdeOrmeId,
+                OmdeRemeId = ormeDetailDto.OmdeRemeId
 
             };
             _repositoryManager.OrmeDetailRepository.Edit(res);
-            return CreatedAtRoute("GetOrmeDetailID", new { id = ormeDetailDto.omde_id }, new OrmeDetailDto
+            return CreatedAtRoute("GetOrmeDetailID", new { id = ormeDetailDto.OmdeId }, new OrmeDetailDto
             {
 
-                omde_id = id,
-                orme_price = res.orme_price,
-                orme_qty = res.orme_qty,
-                orme_subtotal = res.orme_subtotal,
-                orme_discount = res.orme_discount,
-                omde_orme_id = res.omde_orme_id,
-                omde_reme_id = res.omde_reme_id
+                OmdeId = id,
+                OrmePrice = res.OrmePrice,
+                OrmeQty = res.OrmeQty,
+                OrmeSubtotal = res.OrmeSubtotal,
+                OrmeDiscount = res.OrmeDiscount,
+                OmdeOrmeId = res.OmdeOrmeId,
+                OmdeRemeId = res.OmdeRemeId
 
             });
         }

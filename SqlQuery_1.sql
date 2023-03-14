@@ -44,3 +44,8 @@ VALUES
 
 
 
+  select * from resto.resto_menu_photos
+  ("SELECT remp_id RempId" +
+                "remp_thumbnail_filename RempThumbnailFilename" +
+                "remp_photo_filename RempPhotoFileName, remp_primary RempPrimary, remp_reme_id RempRemeId, remp_url RempUrl" +
+                " From Resto.resto_menu_photos");

@@ -45,11 +45,11 @@ namespace Realta.Services
                 var fileName = _utilityService.UploadSingleFile(itemPhoto);
                 var menuPhotos = new MenuPhotos
                 {
-                    remp_photo_filename = fileName,
-                    remp_thumbnail_filename = fileName,
-                    remp_url = itemPhoto.FileName,
-                    remp_primary = true,
-                    remp_reme_id = RemeId
+                    RempPhotoFilename = fileName,
+                    RempThumbnailFilename = fileName,
+                    RempUrl = itemPhoto.FileName,
+                    RempPrimary = true,
+                    RempRemeId = RemeId
                 };
                 _repositoryManager.MenuPhotosRepository.Insert(menuPhotos);
             }

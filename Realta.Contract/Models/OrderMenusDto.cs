@@ -8,17 +8,17 @@ namespace Realta.Contract.Models
 {
     public class OrderMenusDto
     {
-        public int orme_id { get; set; }
+        public int OrmeId { get; set; }
 
-        public string? orme_order_number { get; set; }
-        public DateTime orme_order_date { get; set; }
-        public short orme_total_item { get; set; }
-        public decimal orme_total_discount { get; set; }
-        public decimal orme_total_amount { get; set; }
-        public string orme_pay_type { get; set; }
-        public string? orme_cardnumber { get; set; }
-        public string orme_is_paid { get; set; }
-        public DateTime orme_modified_date { get; set; }
-        public int orme_user_id { get; set; }
+        public string? OrmeOrderNumber { get; set; }
+        public DateTime OrmeOrderDate { get; set; }
+        public short OrmeTotalItem { get; set; }
+        public decimal OrmeTotalDiscount { get; set; }
+        public decimal OrmeTotalAmount { get; set; }
+        public string OrmePayType { get; set; }
+        public string? OrmeCardnumber { get; set; }
+        public string OrmeIsPaid { get; set; }
+        public DateTime OrmeModifiedDate { get; set; }
+        public int OrmeUserId { get; set; }
     }
 }

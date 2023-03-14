@@ -8,12 +8,12 @@ namespace Realta.Contract.Models
 {
     public class OrmeDetailDto
     {
-        public int omde_id { get; set; }
-        public decimal orme_price { get; set; }
-        public short orme_qty { get; set; }
-        public decimal orme_subtotal { get; set; }
-        public decimal orme_discount { get; set; }
-        public int omde_orme_id { get; set; }
-        public int omde_reme_id { get; set; }
+        public int OmdeId { get; set; }
+        public decimal OrmePrice { get; set; }
+        public short OrmeQty { get; set; }
+        public decimal OrmeSubtotal { get; set; }
+        public decimal OrmeDiscount { get; set; }
+        public int OmdeOrmeId { get; set; }
+        public int OmdeRemeId { get; set; }
     }
 }

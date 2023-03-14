@@ -1,6 +1,8 @@
 ﻿using Realta.Domain.Entities;
 using Realta.Domain.Repositories;
+using Realta.Domain.RequestFeatures;
 using Realta.Persistence.Base;
+using Realta.Persistence.Repositories.RepositoryExtensions;
 using Realta.Persistence.RepositoryContext;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,8 @@ using System.Threading.Tasks;
 namespace Realta.Persistence.Repositories
 {
     internal class RestoMenusRepository : RepositoryBase<RestoMenus>, IRestoMenusRepository
+
+
     {
         public RestoMenusRepository(AdoDbContext adoContext) : base(adoContext)
         {
@@ -69,7 +73,7 @@ namespace Realta.Persistence.Repositories
 
             _adoContext.ExecuteNonQuery(model);
             _adoContext.Dispose();
-        }  
+        }
 
         public IEnumerable<RestoMenus> FindAllRestoMenus()
         {
@@ -78,7 +82,7 @@ namespace Realta.Persistence.Repositories
                 "reme_description RemeDescription, " +
                 "reme_price RemePrice, reme_status RemeStatus, " +
                 "reme_modified_date RemeModifiedDate, " +
-                "reme_type Remetype from Resto.resto_menus");
+                "reme_type RemeType from Resto.resto_menus");
 
             while (dataSet.MoveNext())
             {
@@ -250,6 +254,94 @@ namespace Realta.Persistence.Repositories
             _adoContext.Dispose();
             return (int)id;
         }
+
+
+
+        public async Task<IEnumerable<RestoMenus>> GetRestoMenuPaging(RestoMenusParameters restoMenusParameters)
+        {
+            SqlCommandModel model = new SqlCommandModel()
+            {
+                CommandText = "Select reme_faci_id RemeFaciId, " +
+                "reme_id RemeId, reme_name RemeName, " +
+                "reme_description RemeDescription, " +
+                "reme_price RemePrice, reme_status RemeStatus, " +
+                "reme_modified_date RemeModifiedDate, " +
+                "reme_type RemeType FROM resto.resto_menus order by reme_id OFFSET @pageNo ROWS FETCH NEXT  @pageSize ROWS ONLY;",
+                CommandType = CommandType.Text,
+                CommandParameters = new SqlCommandParameterModel[] {
+                    new SqlCommandParameterModel() {
+                            ParameterName = "@pageNo",
+                            DataType = DbType.Int32,
+                            Value = restoMenusParameters.PageNumber
+                        },
+                     new SqlCommandParameterModel() {
+                            ParameterName = "@pageSize",
+                            DataType = DbType.Int32,
+                            Value = restoMenusParameters.PageSize
+                        }
+                }
+
+            };
+
+            IAsyncEnumerator<RestoMenus> dataSet = FindAllAsync<RestoMenus>(model);
+
+            var item = new List<RestoMenus>();
+
+            while (await dataSet.MoveNextAsync())
+            {
+                item.Add(dataSet.Current);
+            }
+
+            return item;
+        }
+
+        public async Task<PagedList<RestoMenus>> GetRestoMenuPagelist(RestoMenusParameters restoMenusParameters)
+        {
+
+            SqlCommandModel model = new SqlCommandModel()
+            {
+                CommandText =
+                            "Select reme_faci_id RemeFaciId, " +
+                            "reme_id RemeId, reme_name RemeName, " +
+                            "reme_description RemeDescription, " +
+                            "reme_price RemePrice, reme_status RemeStatus, " +
+                            "reme_modified_date RemeModifiedDate, " +
+                            "reme_type RemeType FROM resto.resto_menus order by reme_id ",
+                            //"OFFSET @pageNo ROWS FETCH NEXT @pageSize ROWS ONLY",
+                CommandType = CommandType.Text,
+                CommandParameters = new SqlCommandParameterModel[] {
+                    new SqlCommandParameterModel() {
+                            ParameterName = "@pageNo",
+                            DataType = DbType.Int32,
+                            Value = restoMenusParameters.PageNumber
+                        },
+                     new SqlCommandParameterModel() {
+                            ParameterName = "@pageSize",
+                            DataType = DbType.Int32,
+                            Value = restoMenusParameters.PageSize
+                        }
+                }
+
+            };
+
+            var restoMenus = await GetAllAsync<RestoMenus>(model);
+            var totalRow = FindAllRestoMenus().Count();
+
+            //var restoSearch = restoMenus.Where(
+            //    p => p.RemeName.ToLower().Contains(
+            //        restoMenusParameters.SearchTerm == null ? "" : restoMenusParameters.SearchTerm.Trim().ToLower()
+            //        )
+            //    ); 
+
+            var restoSearch = restoMenus.AsQueryable().SearchRestoMenus(restoMenusParameters.SearchTerm).Sort(restoMenusParameters.orderBy);
+
+            //return new PagedList<Product>(products.ToList(), totalRow, productParameters.PageNumber, productParameters.PageSize);
+            //return new PagedList<RestoMenus>(restoSearch.ToList(), totalRow, restoMenusParameters.PageNumber, restoMenusParameters.PageSize);
+            return PagedList<RestoMenus>.ToPagedList(restoSearch.ToList(), restoMenusParameters.PageNumber, restoMenusParameters.PageSize);
+        }
+
     }
 }
+
+
 

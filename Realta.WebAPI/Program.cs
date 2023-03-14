@@ -35,6 +35,8 @@ internal class Program
             app.UseSwaggerUI();
         }
 
+        app.UseStaticFiles();
+
         app.ConfigureExceptionHandler(logger);
         app.UseHttpsRedirection();
 

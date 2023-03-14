@@ -29,17 +29,17 @@ namespace Realta.WebAPI.Controllers
             var orderMenus = _repositoryManager.OrderMenusRepository.FindAllOrderMenus().ToList();
             var orderMenusDto = orderMenus.Select(r => new OrderMenusDto
             {
-            orme_id = r.orme_id,
-            orme_order_number   = r.orme_order_number,
-            orme_order_date     = r.orme_order_date,
-            orme_total_item     = r.orme_total_item,
-            orme_total_discount = r.orme_total_discount,
-            orme_total_amount   = r.orme_total_amount,
-            orme_pay_type       = r.orme_pay_type,
-            orme_cardnumber     = r.orme_cardnumber,
-            orme_is_paid        = r.orme_is_paid,
-            orme_modified_date  = r.orme_modified_date,
-            orme_user_id        = r.orme_user_id
+            OrmeId = r.OrmeId,
+            OrmeOrderNumber   = r.OrmeOrderNumber,
+            OrmeOrderDate     = r.OrmeOrderDate,
+            OrmeTotalItem     = r.OrmeTotalItem,
+            OrmeTotalDiscount = r.OrmeTotalDiscount,
+            OrmeTotalAmount   = r.OrmeTotalAmount,
+            OrmePayType       = r.OrmePayType,
+            OrmeCardnumber     = r.ormeCardnumber,
+            OrmeIsPaid        = r.OrmeIsPaid,
+            OrmeModifiedDate  = r.OrmeModifiedDate,
+            OrmeUserId        = r.OrmeUserId
             });
 
 
@@ -70,17 +70,17 @@ namespace Realta.WebAPI.Controllers
 
             var resOrderMenus = new OrderMenusDto
             {
-                orme_id = orderMenus.orme_id,
-                orme_order_number = orderMenus.orme_order_number,
-                orme_order_date = orderMenus.orme_order_date,
-                orme_total_item = orderMenus.orme_total_item,
-                orme_total_discount = orderMenus.orme_total_discount,
-                orme_total_amount = orderMenus.orme_total_amount,
-                orme_pay_type = orderMenus.orme_pay_type,
-                orme_cardnumber = orderMenus.orme_cardnumber,
-                orme_is_paid = orderMenus.orme_is_paid,
-                orme_modified_date = orderMenus.orme_modified_date,
-                orme_user_id = orderMenus.orme_user_id
+                OrmeId = orderMenus.OrmeId,
+                OrmeOrderNumber = orderMenus.OrmeOrderNumber,
+                OrmeOrderDate = orderMenus.OrmeOrderDate,
+                OrmeTotalItem = orderMenus.OrmeTotalItem,
+                OrmeTotalDiscount = orderMenus.OrmeTotalDiscount,
+                OrmeTotalAmount = orderMenus.OrmeTotalAmount,
+                OrmePayType = orderMenus.OrmePayType,
+                OrmeCardnumber = orderMenus.ormeCardnumber,
+                OrmeIsPaid = orderMenus.OrmeIsPaid,
+                OrmeModifiedDate = orderMenus.OrmeModifiedDate,
+                OrmeUserId = orderMenus.OrmeUserId
             };
 
 
@@ -99,15 +99,15 @@ namespace Realta.WebAPI.Controllers
 
             var orderMenus = new OrderMenus()
             {
-                orme_order_date = orderMenusDto.orme_order_date,
-                orme_total_item = orderMenusDto.orme_total_item,
-                orme_total_discount = orderMenusDto.orme_total_discount,
-                orme_total_amount = orderMenusDto.orme_total_amount,
-                orme_pay_type = orderMenusDto.orme_pay_type,
-                orme_cardnumber = orderMenusDto.orme_cardnumber,
-                orme_is_paid = orderMenusDto.orme_is_paid,
-                orme_modified_date = orderMenusDto.orme_modified_date,
-                orme_user_id = orderMenusDto.orme_user_id
+                OrmeOrderDate = orderMenusDto.OrmeOrderDate,
+                OrmeTotalItem = orderMenusDto.OrmeTotalItem,
+                OrmeTotalDiscount = orderMenusDto.OrmeTotalDiscount,
+                OrmeTotalAmount = orderMenusDto.OrmeTotalAmount,
+                OrmePayType = orderMenusDto.OrmePayType,
+                ormeCardnumber = orderMenusDto.OrmeCardnumber,
+                OrmeIsPaid = orderMenusDto.OrmeIsPaid,
+                OrmeModifiedDate = orderMenusDto.OrmeModifiedDate,
+                OrmeUserId = orderMenusDto.OrmeUserId
             };
 
             _repositoryManager.OrderMenusRepository.Insert(orderMenus);
@@ -131,34 +131,34 @@ namespace Realta.WebAPI.Controllers
             var res = new OrderMenus
             {
 
-                orme_id = orderMenusDto.orme_id,
-                orme_order_number = orderMenusDto.orme_order_number,
-                orme_order_date = orderMenusDto.orme_order_date,
-                orme_total_item = orderMenusDto.orme_total_item,
-                orme_total_discount = orderMenusDto.orme_total_discount,
-                orme_total_amount = orderMenusDto.orme_total_amount,
-                orme_pay_type = orderMenusDto.orme_pay_type,
-                orme_cardnumber = orderMenusDto.orme_cardnumber,
-                orme_is_paid = orderMenusDto.orme_is_paid,
-                orme_modified_date = orderMenusDto.orme_modified_date,
-                orme_user_id = orderMenusDto.orme_user_id
+                OrmeId = orderMenusDto.OrmeId,
+                OrmeOrderNumber = orderMenusDto.OrmeOrderNumber,
+                OrmeOrderDate = orderMenusDto.OrmeOrderDate,
+                OrmeTotalItem = orderMenusDto.OrmeTotalItem,
+                OrmeTotalDiscount = orderMenusDto.OrmeTotalDiscount,
+                OrmeTotalAmount = orderMenusDto.OrmeTotalAmount,
+                OrmePayType = orderMenusDto.OrmePayType,
+                ormeCardnumber = orderMenusDto.OrmeCardnumber,
+                OrmeIsPaid = orderMenusDto.OrmeIsPaid,
+                OrmeModifiedDate = orderMenusDto.OrmeModifiedDate,
+                OrmeUserId = orderMenusDto.OrmeUserId
 
             };
             _repositoryManager.OrderMenusRepository.Edit(res);
-            return CreatedAtRoute("GetOrderMenusID", new { id = orderMenusDto.orme_id }, new OrderMenusDto
+            return CreatedAtRoute("GetOrderMenusID", new { id = orderMenusDto.OrmeId }, new OrderMenusDto
             {
 
-                orme_id = res.orme_id,
-                orme_order_number = res.orme_order_number,
-                orme_order_date = res.orme_order_date,
-                orme_total_item = res.orme_total_item,
-                orme_total_discount = res.orme_total_discount,
-                orme_total_amount = res.orme_total_amount,
-                orme_pay_type = res.orme_pay_type,
-                orme_cardnumber = res.orme_cardnumber,
-                orme_is_paid = res.orme_is_paid,
-                orme_modified_date = res.orme_modified_date,
-                orme_user_id = res.orme_user_id
+                OrmeId = res.OrmeId,
+                OrmeOrderNumber = res.OrmeOrderNumber,
+                OrmeOrderDate = res.OrmeOrderDate,
+                OrmeTotalItem = res.OrmeTotalItem,
+                OrmeTotalDiscount = res.OrmeTotalDiscount,
+                OrmeTotalAmount = res.OrmeTotalAmount,
+                OrmePayType = res.OrmePayType,
+                OrmeCardnumber = res.ormeCardnumber,
+                OrmeIsPaid = res.OrmeIsPaid,
+                OrmeModifiedDate = res.OrmeModifiedDate,
+                OrmeUserId = res.OrmeUserId
 
 
             });

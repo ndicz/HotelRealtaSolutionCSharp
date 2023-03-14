@@ -14,8 +14,8 @@ namespace Realta.Contract.Models
         public string RempThumbnailFilename { get; set; }
         public string RempPhotoFilename { get; set; }
         public bool RempPrimary { get; set; }
-        public string remp_url { get; set; }
-        public int remp_reme_id { get; set; }
+        public string RempUrl { get; set; }
+        public int RempRemeId { get; set; }
     }
 }
 

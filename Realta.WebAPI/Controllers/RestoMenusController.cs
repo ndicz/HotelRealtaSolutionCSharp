@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Realta.Contract.Models;
 using Realta.Domain.Base;
 using Realta.Domain.Entities;
+using Realta.Domain.RequestFeatures;
 using Realta.Services.Abstraction;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -31,22 +33,22 @@ namespace Realta.WebAPI.Controllers
         public IActionResult Get()
         {
             var restoMenus = _repositoryManager.RestoMenusRepository.FindAllRestoMenus().ToList();
+            var menusPhotos = _repositoryManager.MenuPhotosRepository.FindAllMenuPhotos().ToList();
             var restoMenusDto = restoMenus.Select(r => new RestoMenusDto
             {
-
-
                 RemeId = r.RemeId,
                 RemeFaciId = r.RemeFaciId,
                 RemeName = r.RemeName,
                 RemeDescription = r.RemeDescription,
-                RemePrice = r.RemePrice ,
+                RemePrice = r.RemePrice,
                 RemeStatus = r.RemeStatus,
                 RemeModifiedDate = r.RemeModifiedDate,
-                RemeType = r.RemeType
+                RemeType = r.RemeType,
+                RempPhotoFilename = menusPhotos.FirstOrDefault(mp => mp.RempRemeId == r.RemeId)?.RempPhotoFilename
+
             });
 
-
-            return Ok(restoMenus);
+            return Ok(restoMenusDto);
 
         }
 
@@ -167,6 +169,25 @@ namespace Realta.WebAPI.Controllers
             _repositoryManager.RestoMenusRepository.Remove(res);
             return Ok("Data has been remove.");
 
+        }
+
+        [HttpGet("paging")]
+        public async Task<IActionResult> GetProductPaging([FromQuery] RestoMenusParameters restoMenusParameters)
+        {
+            var remePaging = await _repositoryManager.RestoMenusRepository.GetRestoMenuPaging(restoMenusParameters);
+            
+            return Ok(remePaging);
+        }
+
+        [HttpGet("pageList")]
+        public async Task<IActionResult> GetRestoMenuPageList([FromQuery] RestoMenusParameters restoMenusParameters)
+        {
+            var restoMenus = await _repositoryManager.RestoMenusRepository.GetRestoMenuPagelist(restoMenusParameters);
+
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(restoMenus.MetaData));
+
+            return Ok(restoMenus);
         }
 
 

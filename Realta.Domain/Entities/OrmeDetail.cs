@@ -12,15 +12,15 @@ namespace Realta.Domain.Entities
     public class OrmeDetail
     {
         [Key]
-           public int omde_id { get; set; }
-           public decimal orme_price { get; set; }
-           public Int16 orme_qty { get; set; }
-           public decimal orme_subtotal { get; set; }
-           public decimal orme_discount { get; set; }
-           public int omde_orme_id { get; set; }
-           public int omde_reme_id { get; set; }
+           public int OmdeId { get; set; }
+           public decimal OrmePrice { get; set; }
+           public Int16 OrmeQty { get; set; }
+           public decimal OrmeSubtotal { get; set; }
+           public decimal OrmeDiscount { get; set; }
+           public int OmdeOrmeId { get; set; }
+           public int OmdeRemeId { get; set; }
             
-        public string? reme_name { get; set; }
+        public string? RemeName { get; set; }
 
     }
 }

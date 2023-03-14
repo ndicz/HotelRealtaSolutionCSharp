@@ -34,37 +34,37 @@ namespace Realta.Persistence.Repositories
                         new SqlCommandParameterModel() {
                         ParameterName = "@omde_id",
                         DataType = DbType.Int32,
-                        Value = ormeDetail.omde_id
+                        Value = ormeDetail.OmdeId
                     },
                         new SqlCommandParameterModel() {
                         ParameterName = "@orme_price",
                         DataType = DbType.Decimal,
-                        Value = ormeDetail.orme_price
+                        Value = ormeDetail.OrmePrice
                     },
                         new SqlCommandParameterModel() {
                         ParameterName = "@orme_qty",
                         DataType = DbType.Int16,
-                        Value = ormeDetail.orme_qty
+                        Value = ormeDetail.OrmeQty
                     },
                         new SqlCommandParameterModel() {
                         ParameterName = "@orme_subtotal",
                         DataType = DbType.Decimal,
-                        Value = ormeDetail.orme_subtotal
+                        Value = ormeDetail.OrmeSubtotal
                     },
                         new SqlCommandParameterModel() {
                         ParameterName = "@orme_discount",
                         DataType = DbType.Decimal,
-                        Value = ormeDetail.orme_discount
+                        Value = ormeDetail.OrmeDiscount
                     },
                         new SqlCommandParameterModel() {
                         ParameterName = "@omde_orme_id",
                         DataType = DbType.Int32,
-                        Value = ormeDetail.omde_orme_id
+                        Value = ormeDetail.OmdeOrmeId
                     },
                                 new SqlCommandParameterModel() {
                         ParameterName = "@omde_reme_id",
                         DataType = DbType.Int32,
-                        Value = ormeDetail.omde_reme_id
+                        Value = ormeDetail.OmdeRemeId
                     }
 
 
@@ -149,33 +149,33 @@ namespace Realta.Persistence.Repositories
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_price",
                         DataType = DbType.Int32,
-                        Value = ormeDetail.orme_price
+                        Value = ormeDetail.OrmePrice
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_qty",
                         DataType = DbType.String,
-                        Value = ormeDetail.orme_qty
+                        Value = ormeDetail.OrmeQty
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_subtotal",
                         DataType = DbType.String,
-                        Value = ormeDetail.orme_subtotal
+                        Value = ormeDetail.OrmeSubtotal
                     },
                     new SqlCommandParameterModel()
                     {
                         ParameterName = "@orme_discount",
                         DataType= DbType.Decimal,
-                        Value = ormeDetail.orme_discount
+                        Value = ormeDetail.OrmeDiscount
                     },
                     new SqlCommandParameterModel() {
                     ParameterName = "@omde_orme_id",
                     DataType = DbType.String,
-                    Value = ormeDetail.omde_orme_id
+                    Value = ormeDetail.OmdeOrmeId
                     },
                     new SqlCommandParameterModel() {
                     ParameterName = "@omde_reme_id",
                     DataType = DbType.Int32,
-                    Value = ormeDetail.omde_reme_id
+                    Value = ormeDetail.OmdeRemeId
                     }
 
                 }
@@ -195,7 +195,7 @@ namespace Realta.Persistence.Repositories
                     new SqlCommandParameterModel() {
                         ParameterName = "@omde_id",
                         DataType = DbType.Int32,
-                        Value = ormeDetail.omde_id
+                        Value = ormeDetail.OmdeId
                     }
                 }
             };

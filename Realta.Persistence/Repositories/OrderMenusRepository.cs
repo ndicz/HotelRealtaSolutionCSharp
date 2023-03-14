@@ -40,57 +40,57 @@ namespace Realta.Persistence.Repositories
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_order_number",
                         DataType = DbType.String,
-                        Value = orderMenus.orme_order_number
+                        Value = orderMenus.OrmeOrderNumber
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_order_date",
                         DataType = DbType.DateTime,
-                        Value = orderMenus.orme_order_date
+                        Value = orderMenus.OrmeOrderDate
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_total_item",
                         DataType = DbType.Int16,
-                        Value = orderMenus.orme_total_item
+                        Value = orderMenus.OrmeTotalItem
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_total_discount",
                         DataType = DbType.Decimal,
-                        Value = orderMenus.orme_total_discount
+                        Value = orderMenus.OrmeTotalDiscount
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_total_amount",
                         DataType = DbType.Decimal,
-                        Value = orderMenus.orme_total_amount
+                        Value = orderMenus.OrmeTotalAmount
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_pay_type",
                         DataType = DbType.String,
-                        Value = orderMenus.orme_pay_type
+                        Value = orderMenus.OrmePayType
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_cardnumber",
                         DataType = DbType.String,
-                        Value = orderMenus.orme_cardnumber
+                        Value = orderMenus.ormeCardnumber
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_is_paid",
                         DataType = DbType.String,
-                        Value = orderMenus.orme_is_paid
+                        Value = orderMenus.OrmeIsPaid
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_modified_date",
                         DataType = DbType.DateTime,
-                        Value = orderMenus.orme_modified_date
+                        Value = orderMenus.OrmeModifiedDate
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_user_id",
                         DataType = DbType.Int32,
-                        Value = orderMenus.orme_user_id
+                        Value = orderMenus.OrmeUserId
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_id",
                         DataType = DbType.Int32,
-                        Value = orderMenus.orme_id
+                        Value = orderMenus.OrmeId
                     }
   }
             };
@@ -173,47 +173,47 @@ namespace Realta.Persistence.Repositories
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_order_date",
                         DataType = DbType.DateTime,
-                        Value = orderMenus.orme_order_date
+                        Value = orderMenus.OrmeOrderDate
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_total_item",
                         DataType = DbType.Int16,
-                        Value = orderMenus.orme_total_item
+                        Value = orderMenus.OrmeTotalItem
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_total_discount",
                         DataType = DbType.Decimal,
-                        Value = orderMenus.orme_total_discount
+                        Value = orderMenus.OrmeTotalDiscount
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_total_amount",
                         DataType = DbType.Decimal,
-                        Value = orderMenus.orme_total_amount
+                        Value = orderMenus.OrmeTotalAmount
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_pay_type",
                         DataType = DbType.String,
-                        Value = orderMenus.orme_pay_type
+                        Value = orderMenus.OrmePayType
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_cardnumber",
                         DataType = DbType.String,
-                        Value = orderMenus.orme_cardnumber
+                        Value = orderMenus.ormeCardnumber
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_is_paid",
                         DataType = DbType.String,
-                        Value = orderMenus.orme_is_paid
+                        Value = orderMenus.OrmeIsPaid
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_modified_date",
                         DataType = DbType.DateTime,
-                        Value = orderMenus.orme_modified_date
+                        Value = orderMenus.OrmeModifiedDate
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_user_id",
                         DataType = DbType.Int32,
-                        Value = orderMenus.orme_user_id
+                        Value = orderMenus.OrmeUserId
                        }
 
                 }
@@ -233,7 +233,7 @@ namespace Realta.Persistence.Repositories
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_id",
                         DataType = DbType.Int32,
-                        Value = orderMenus.orme_id
+                        Value = orderMenus.OrmeId
                 }
                 }
             };
@@ -256,7 +256,7 @@ namespace Realta.Persistence.Repositories
         {
             SqlCommandModel model = new SqlCommandModel()
             {
-                CommandText = "GetOrderMenusWithDetailsById",
+                CommandText = "Resto.GetOrderMenusWithDetailsById",
                 CommandType = CommandType.StoredProcedure,
                 CommandParameters = new SqlCommandParameterModel[] {
 
@@ -279,13 +279,13 @@ namespace Realta.Persistence.Repositories
 
             var orderDetail = listData.Select(x => new OrmeDetail
             {
-                omde_id = x.omde_id,
-                orme_price = x.orme_price,
-                orme_qty = x.orme_qty,
-                orme_subtotal = x.orme_subtotal,
-                omde_orme_id = x.omde_orme_id,
-                omde_reme_id = x.omde_reme_id,
-                reme_name = x.reme_name
+                OmdeId = x.omde_id,
+                OrmePrice = x.orme_price,
+                OrmeQty = x.orme_qty,
+                OrmeSubtotal = x.orme_subtotal,
+                OmdeOrmeId = x.omde_orme_id,
+                OmdeRemeId = x.omde_reme_id,
+                RemeName = x.reme_name
             });
 
             var nestedJson = new OrderMenusNestedMenusDetail

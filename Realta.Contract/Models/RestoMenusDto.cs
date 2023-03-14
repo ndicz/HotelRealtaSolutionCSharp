@@ -23,5 +23,8 @@ namespace Realta.Contract.Models
         public DateTime RemeModifiedDate { get; set; } = DateTime.Now;
 
         public string RemeType { get; set; }
+
+        public string RempUrl { get; set; }
+        public string RempPhotoFilename { get; set; }
     }
 }

@@ -33,33 +33,33 @@ namespace Realta.Persistence.Repositories
                     new SqlCommandParameterModel() {
                         ParameterName = "@remp_thumbnail_filename",
                         DataType = DbType.String,
-                        Value = menuPhotos.remp_thumbnail_filename
+                        Value = menuPhotos.RempThumbnailFilename
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@remp_photo_filename",
                         DataType = DbType.String,
-                        Value = menuPhotos.remp_photo_filename
+                        Value = menuPhotos.RempPhotoFilename
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@remp_primary",
                         DataType = DbType.Boolean,
-                        Value = menuPhotos.remp_primary
+                        Value = menuPhotos.RempPrimary
 
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@remp_url",
                         DataType = DbType.String,
-                        Value = menuPhotos.remp_url
+                        Value = menuPhotos.RempUrl
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@remp_reme_id",
                         DataType = DbType.Int32,
-                        Value = menuPhotos.remp_reme_id
+                        Value = menuPhotos.RempRemeId
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@remp_id",
                         DataType = DbType.Int32,
-                        Value = menuPhotos.remp_id
+                        Value = menuPhotos.RempId
                     }
                      }
             };
@@ -73,7 +73,13 @@ namespace Realta.Persistence.Repositories
 
         public IEnumerable<MenuPhotos> FindAllMenuPhotos()
         {
-            IEnumerator<MenuPhotos> dataSet = FindAll<MenuPhotos>("SELECT  * From Resto.resto_menu_photos");
+            IEnumerator<MenuPhotos> dataSet = FindAll<MenuPhotos>("SELECT remp_id RempId," +
+                "remp_thumbnail_filename RempThumbnailFilename," +
+                "remp_photo_filename RempPhotoFilename, " +
+                "remp_primary RempPrimary, " +
+                "remp_url RempUrl," +
+                "remp_reme_id RempRemeId " +
+                " From Resto.resto_menu_photos");
 
             while (dataSet.MoveNext())
             {
@@ -143,28 +149,28 @@ namespace Realta.Persistence.Repositories
                     new SqlCommandParameterModel() {
                         ParameterName = "@remp_thumbnail_filename",
                         DataType = DbType.String,
-                        Value = menuPhotos.remp_thumbnail_filename
+                        Value = menuPhotos.RempThumbnailFilename
                     },
                        new SqlCommandParameterModel() {
                         ParameterName = "@remp_photo_filename",
                         DataType = DbType.String,
-                        Value = menuPhotos.remp_photo_filename
+                        Value = menuPhotos.RempPhotoFilename
                     },
                        new SqlCommandParameterModel() {
                         ParameterName = "@remp_primary",
                         DataType = DbType.Boolean,
-                        Value = menuPhotos.remp_primary
+                        Value = menuPhotos.RempPrimary
 
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@remp_url",
                         DataType = DbType.String,
-                        Value = menuPhotos.remp_url
+                        Value = menuPhotos.RempUrl
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@remp_reme_id",
                         DataType = DbType.Int32,
-                        Value = menuPhotos.remp_reme_id
+                        Value = menuPhotos.RempRemeId
                     }
                       }
 
@@ -184,7 +190,7 @@ namespace Realta.Persistence.Repositories
                     new SqlCommandParameterModel() {
                         ParameterName = "@remp_id",
                         DataType = DbType.Int32,
-                        Value = menuPhotos.remp_id
+                        Value = menuPhotos.RempId
                 }
                 }
             };
