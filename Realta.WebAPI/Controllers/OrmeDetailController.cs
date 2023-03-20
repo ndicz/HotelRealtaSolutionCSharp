@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Realta.Contract.Models;
 using Realta.Domain.Base;
+using Realta.Domain.Dto;
 using Realta.Domain.Entities;
 using Realta.Services.Abstraction;
 
@@ -72,70 +73,42 @@ namespace Realta.WebAPI.Controllers
 
         // POST api/<OrmeDetailController>
         [HttpPost]
-        public IActionResult CreateOrmeDetail([FromBody] OrmeDetailDto ormeDetailDto)
+        public IActionResult CreateOrmeDetail([FromBody] NewOrderMenusDto orderMenusDto)
         {
             //1. prevent regiondto from null
-            if (ormeDetailDto == null)
+            if (orderMenusDto == null)
             {
                 _logger.LogError("Regiondto object sent from client is null");
                 return BadRequest("RegionDto object is null");
             }
 
-            var ormeDetail = new OrmeDetail()
-            {
-                OrmePrice = ormeDetailDto.OrmePrice,
-                OrmeQty = ormeDetailDto.OrmeQty,
-                OrmeSubtotal = ormeDetailDto.OrmeSubtotal,
-                OrmeDiscount = ormeDetailDto.OrmeDiscount,
-                OmdeOrmeId = ormeDetailDto.OmdeOrmeId,
-                OmdeRemeId = ormeDetailDto.OmdeRemeId
-            };
-
-            _repositoryManager.OrmeDetailRepository.Insert(ormeDetail);
+      
+            _repositoryManager.OrmeDetailRepository.Insert(orderMenusDto);
 
             //forward 
 
-            var res = _repositoryManager.OrmeDetailRepository.FindLastOrmeDetailId().ToList();
-            return Ok(res);
+            return Ok();
 
         }
 
         // PUT api/<OrmeDetailController>/5
         [HttpPut("{id}")]
-        public IActionResult UpdateOrmeDetail(int id, [FromBody] OrmeDetailDto ormeDetailDto)
+        public IActionResult UpdateOrmeDetail(int id, [FromBody] NewOrderMenusDto ormeDetailDto)
         {
             if (ormeDetailDto == null)
             {
                 _logger.LogError("RegionDto object sent from client is null");
                 return BadRequest("RegionDto object is null");
             }
-            var res = new OrmeDetail
-            {
-                OmdeId = id,
-                OrmePrice = ormeDetailDto.OrmePrice,
-                OrmeQty = ormeDetailDto.OrmeQty,
-                OrmeSubtotal = ormeDetailDto.OrmeSubtotal,
-                OrmeDiscount = ormeDetailDto.OrmeDiscount,
-                OmdeOrmeId = ormeDetailDto.OmdeOrmeId,
-                OmdeRemeId = ormeDetailDto.OmdeRemeId
+            ormeDetailDto.OrmeId = id;
+           
+            _repositoryManager.OrmeDetailRepository.Edit(ormeDetailDto);
 
-            };
-            _repositoryManager.OrmeDetailRepository.Edit(res);
-            return CreatedAtRoute("GetOrmeDetailID", new { id = ormeDetailDto.OmdeId }, new OrmeDetailDto
-            {
-
-                OmdeId = id,
-                OrmePrice = res.OrmePrice,
-                OrmeQty = res.OrmeQty,
-                OrmeSubtotal = res.OrmeSubtotal,
-                OrmeDiscount = res.OrmeDiscount,
-                OmdeOrmeId = res.OmdeOrmeId,
-                OmdeRemeId = res.OmdeRemeId
-
-            });
+            return Ok();
+           
         }
 
-        // DELETE api/<OrmeDetailController>/5
+        // DELETE api/<OrmeDetailController>/5w
         [HttpDelete("{id}")]
         public IActionResult RemoveOrmeDetail(int? id)
         {

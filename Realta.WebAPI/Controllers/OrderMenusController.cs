@@ -39,7 +39,8 @@ namespace Realta.WebAPI.Controllers
             OrmeCardnumber     = r.ormeCardnumber,
             OrmeIsPaid        = r.OrmeIsPaid,
             OrmeModifiedDate  = r.OrmeModifiedDate,
-            OrmeUserId        = r.OrmeUserId
+            OrmeUserId        = r.OrmeUserId,
+            OrmeStatus        = r.OrmeStatus
             });
 
 

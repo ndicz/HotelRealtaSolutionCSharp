@@ -1,6 +1,7 @@
 using Realta.Services.Abstraction;
 using Realta.Services;
 using Realta.WebAPI.Extensions;
+using Microsoft.Extensions.FileProviders;
 
 internal class Program
 {
@@ -43,6 +44,15 @@ internal class Program
         //add custom
         app.UseStaticFiles();
         app.UseCors("CorsPolicy");
+
+        // add custome
+     
+        // set folder resources to static file
+        app.UseStaticFiles(new StaticFileOptions()
+        {
+            FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+            RequestPath = new PathString("/Resources")
+        });
 
         app.UseAuthorization();
 

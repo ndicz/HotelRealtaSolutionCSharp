@@ -15,5 +15,14 @@ namespace Realta.Contract.Models
 
 
         public List<IFormFile>? AllPhotos { get; set; }
+
+        public string RemeName { get; set; }        
+        public decimal RemePrice { get; set; }
+
+        public string RemeStatus { get; set; }
+
+        public string RemeType { get; set; }
+
+
     }
 }

@@ -126,7 +126,7 @@ namespace Realta.WebAPI.Controllers
                 RemeDescription = restoMenusDto.RemeDescription,
                 RemePrice = restoMenusDto.RemePrice,
                 RemeStatus = restoMenusDto.RemeStatus,
-                RemeModifiedDate = restoMenusDto.RemeModifiedDate
+             
 
             };
             _repositoryManager.RestoMenusRepository.Edit(res);
@@ -138,7 +138,7 @@ namespace Realta.WebAPI.Controllers
                 RemeDescription = res.RemeDescription,
                 RemePrice = res.RemePrice,
                 RemeStatus = res.RemeStatus,
-                RemeModifiedDate = res.RemeModifiedDate
+             
 
 
             });

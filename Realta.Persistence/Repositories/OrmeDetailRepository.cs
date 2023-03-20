@@ -1,4 +1,6 @@
-﻿using Realta.Domain.Entities;
+﻿using Microsoft.VisualBasic;
+using Realta.Domain.Dto;
+using Realta.Domain.Entities;
 using Realta.Domain.Repositories;
 using Realta.Persistence.Base;
 using Realta.Persistence.RepositoryContext;
@@ -17,56 +19,39 @@ namespace Realta.Persistence.Repositories
         {
         }
 
-        public void Edit(OrmeDetail ormeDetail)
+        public void Edit(NewOrderMenusDto ormeDetail)
         {
             SqlCommandModel model = new SqlCommandModel()
             {
-                CommandText = "UPDATE Resto.order_menu_detail set  orme_price = @orme_price," +
-                "orme_qty = @orme_qty," +
-                "orme_subtotal = @orme_subtotal," +
-                "orme_discount = @orme_discount," +
-                "omde_orme_id = @omde_orme_id," +
-                "omde_reme_id =" +
-                " @omde_reme_id WHERE omde_id = @omde_id;",
+                CommandText = @"UPDATE Resto.order_menus
+                                SET orme_status = 'Ordered',
+                                orme_pay_type = @OrmePayType,
+                                orme_cardnumber = @OrmeCardnumber,
+                                orme_is_paid = @OrmeIsPaid
+                                WHERE orme_id = @OrmeId;",
 
                 CommandType = CommandType.Text,
                 CommandParameters = new SqlCommandParameterModel[] {
                         new SqlCommandParameterModel() {
-                        ParameterName = "@omde_id",
+                        ParameterName = "@OrmePayType",
+                        DataType = DbType.String,
+                        Value = ormeDetail.OrmePayType
+                    },
+                        new SqlCommandParameterModel() {
+                        ParameterName = "@OrmeCardnumber",
+                        DataType = DbType.String,
+                        Value = ormeDetail.OrmeCardnumber
+                    },
+                        new SqlCommandParameterModel() {
+                        ParameterName = "@OrmeIsPaid",
+                        DataType = DbType.String,
+                        Value = ormeDetail.OrmeIsPaid
+                    },
+                           new SqlCommandParameterModel() {
+                        ParameterName = "@OrmeId",
                         DataType = DbType.Int32,
-                        Value = ormeDetail.OmdeId
-                    },
-                        new SqlCommandParameterModel() {
-                        ParameterName = "@orme_price",
-                        DataType = DbType.Decimal,
-                        Value = ormeDetail.OrmePrice
-                    },
-                        new SqlCommandParameterModel() {
-                        ParameterName = "@orme_qty",
-                        DataType = DbType.Int16,
-                        Value = ormeDetail.OrmeQty
-                    },
-                        new SqlCommandParameterModel() {
-                        ParameterName = "@orme_subtotal",
-                        DataType = DbType.Decimal,
-                        Value = ormeDetail.OrmeSubtotal
-                    },
-                        new SqlCommandParameterModel() {
-                        ParameterName = "@orme_discount",
-                        DataType = DbType.Decimal,
-                        Value = ormeDetail.OrmeDiscount
-                    },
-                        new SqlCommandParameterModel() {
-                        ParameterName = "@omde_orme_id",
-                        DataType = DbType.Int32,
-                        Value = ormeDetail.OmdeOrmeId
-                    },
-                                new SqlCommandParameterModel() {
-                        ParameterName = "@omde_reme_id",
-                        DataType = DbType.Int32,
-                        Value = ormeDetail.OmdeRemeId
+                        Value = ormeDetail.OrmeId
                     }
-
 
             }
             };
@@ -108,7 +93,7 @@ namespace Realta.Persistence.Repositories
 
             return item;
         }
-     
+
         public OrmeDetail FindOrmeDetailById(int id)
         {
             SqlCommandModel model = new SqlCommandModel()
@@ -137,47 +122,60 @@ namespace Realta.Persistence.Repositories
             return item;
         }
 
-        public void Insert(OrmeDetail ormeDetail)
+        public void Insert(NewOrderMenusDto orderMenusDto)
         {
             SqlCommandModel model = new SqlCommandModel()
             {
-                CommandText = "INSERT INTO Resto.order_menu_detail (orme_price, orme_qty,orme_subtotal,orme_discount,omde_orme_id,omde_reme_id) " +
-              "VALUES(@orme_price,@orme_qty,@orme_subtotal,@orme_discount,@omde_orme_id,@omde_reme_id)",
+                CommandText = "Resto.create_order_menu_detail",
 
-                CommandType = CommandType.Text,
+                CommandType = CommandType.StoredProcedure,
                 CommandParameters = new SqlCommandParameterModel[] {
                     new SqlCommandParameterModel() {
-                        ParameterName = "@orme_price",
+                        ParameterName = "@omde_reme_id",
                         DataType = DbType.Int32,
-                        Value = ormeDetail.OrmePrice
+                        Value = orderMenusDto.OmdeRemeId
+                    },
+                    new SqlCommandParameterModel() {
+                        ParameterName = "@orme_price",
+                        DataType = DbType.Decimal,
+                        Value = orderMenusDto.OrmePrice
                     },
                     new SqlCommandParameterModel() {
                         ParameterName = "@orme_qty",
-                        DataType = DbType.String,
-                        Value = ormeDetail.OrmeQty
-                    },
-                    new SqlCommandParameterModel() {
-                        ParameterName = "@orme_subtotal",
-                        DataType = DbType.String,
-                        Value = ormeDetail.OrmeSubtotal
+                        DataType = DbType.Int16,
+                        Value = orderMenusDto.OrmeQty
                     },
                     new SqlCommandParameterModel()
                     {
                         ParameterName = "@orme_discount",
                         DataType= DbType.Decimal,
-                        Value = ormeDetail.OrmeDiscount
+                        Value = orderMenusDto.OrmeDiscount
                     },
                     new SqlCommandParameterModel() {
-                    ParameterName = "@omde_orme_id",
+                    ParameterName = "@orme_pay_type",
                     DataType = DbType.String,
-                    Value = ormeDetail.OmdeOrmeId
+                    Value = orderMenusDto.OrmePayType
                     },
                     new SqlCommandParameterModel() {
-                    ParameterName = "@omde_reme_id",
+                    ParameterName = "@orme_cardnumber",
+                    DataType = DbType.String,
+                    Value = orderMenusDto.OrmeCardnumber
+                    },
+                     new SqlCommandParameterModel() {
+                    ParameterName = "@orme_is_paid",
+                    DataType = DbType.String,
+                    Value = orderMenusDto.OrmeIsPaid
+                    },
+                       new SqlCommandParameterModel() {
+                    ParameterName = "@orme_user_id",
                     DataType = DbType.Int32,
-                    Value = ormeDetail.OmdeRemeId
+                    Value = orderMenusDto.OrmeUserId
+                    },
+                         new SqlCommandParameterModel() {
+                    ParameterName = "@orme_status",
+                    DataType = DbType.String,
+                    Value = orderMenusDto.OrmeStatus
                     }
-
                 }
 
             };
@@ -203,7 +201,7 @@ namespace Realta.Persistence.Repositories
             _adoContext.Dispose();
         }
 
-            public IEnumerable<OrmeDetail> FindLastOrmeDetailId()
+        public IEnumerable<OrmeDetail> FindLastOrmeDetailId()
         {
             IEnumerator<OrmeDetail> dataset = FindAll<OrmeDetail>("SELECT * FROM Resto.order_menu_detail where omde_id =(SELECT IDENT_CURRENT('Resto.order_menu_detail'));");
             while (dataset.MoveNext())

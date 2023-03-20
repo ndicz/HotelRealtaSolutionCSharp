@@ -22,5 +22,8 @@ namespace Realta.Domain.Entities
         public DateTime RemeModifiedDate { get; set; }
         public string? RemeType { get; set; }
 
+        public string? RempPhotoFilename { get; set; }
+        public int OrmeId { get; set; }
+
     }
 }

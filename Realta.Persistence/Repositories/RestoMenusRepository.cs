@@ -4,12 +4,7 @@ using Realta.Domain.RequestFeatures;
 using Realta.Persistence.Base;
 using Realta.Persistence.Repositories.RepositoryExtensions;
 using Realta.Persistence.RepositoryContext;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Realta.Persistence.Repositories
 {
@@ -57,12 +52,7 @@ namespace Realta.Persistence.Repositories
                         DataType = DbType.String,
                         Value = restoMenus.RemeStatus
                     },
-                        new SqlCommandParameterModel() {
-                        ParameterName = "@reme_mod",
-                        DataType = DbType.DateTime,
-                        Value = restoMenus.RemeModifiedDate
-                    },
-
+             
                         new SqlCommandParameterModel() {
                         ParameterName = "@reme_id",
                         DataType = DbType.Int32,
@@ -160,43 +150,43 @@ namespace Realta.Persistence.Repositories
             SqlCommandModel model = new SqlCommandModel()
             {
                 CommandText = "INSERT INTO Resto.resto_menus (reme_faci_id,reme_name,reme_description,reme_price,reme_status,reme_modified_date,reme_type) " +
-               "VALUES(@reme_faci_id,@reme_name,@reme_desc,@reme_price,@reme_status,@reme_mod,@reme_type)",
+               "VALUES(@RemeFaciId,@RemeName,@RemeDescription,@RemePrice,@RemeStatus,@RemeModifiedDate,@RemeType)",
 
                 CommandType = CommandType.Text,
                 CommandParameters = new SqlCommandParameterModel[] {
                     new SqlCommandParameterModel() {
-                        ParameterName = "@reme_faci_id",
+                        ParameterName = "@RemeFaciId",
                         DataType = DbType.Int32,
                         Value = restoMenus.RemeFaciId
                     },
                     new SqlCommandParameterModel() {
-                        ParameterName = "@reme_name",
+                        ParameterName = "@RemeName",
                         DataType = DbType.String,
                         Value = restoMenus.RemeName
                     },
                     new SqlCommandParameterModel() {
-                        ParameterName = "@reme_desc",
+                        ParameterName = "@RemeDescription",
                         DataType = DbType.String,
                         Value = restoMenus.RemeDescription
                     },
                     new SqlCommandParameterModel()
                     {
-                        ParameterName = "@reme_price",
+                        ParameterName = "@RemePrice",
                         DataType= DbType.Decimal,
                         Value = restoMenus.RemePrice
                     },
                     new SqlCommandParameterModel() {
-                    ParameterName = "@reme_status",
+                    ParameterName = "@RemeStatus",
                     DataType = DbType.String,
                     Value = restoMenus.RemeStatus
                     },
                     new SqlCommandParameterModel() {
-                    ParameterName = "@reme_mod",
+                    ParameterName = "@RemeModifiedDate",
                     DataType = DbType.DateTime,
                     Value = restoMenus.RemeModifiedDate
                     },
                     new SqlCommandParameterModel() {
-                    ParameterName = "@reme_type",
+                    ParameterName = "@RemeType",
                     DataType = DbType.String,
                     Value = restoMenus.RemeType
                     }
@@ -300,15 +290,27 @@ namespace Realta.Persistence.Repositories
 
             SqlCommandModel model = new SqlCommandModel()
             {
-                CommandText =
-                            "Select reme_faci_id RemeFaciId, " +
-                            "reme_id RemeId, reme_name RemeName, " +
-                            "reme_description RemeDescription, " +
-                            "reme_price RemePrice, reme_status RemeStatus, " +
-                            "reme_modified_date RemeModifiedDate, " +
-                            "reme_type RemeType FROM resto.resto_menus order by reme_id ",
-                            //"OFFSET @pageNo ROWS FETCH NEXT @pageSize ROWS ONLY",
-                CommandType = CommandType.Text,
+                                        CommandText = @"
+                        SELECT m.reme_faci_id AS RemeFaciId,
+                               m.reme_id AS RemeId,
+                               m.reme_name AS RemeName,
+                               m.reme_description AS RemeDescription,
+                               m.reme_price AS RemePrice,
+                               m.reme_status AS RemeStatus,
+                               m.reme_modified_date AS RemeModifiedDate,
+                               m.reme_type AS RemeType,
+                               p.remp_photo_filename AS RempPhotoFilename,
+                               p.remp_primary AS RempPrimary,
+                               p.remp_id,
+                               p.remp_primary
+                        FROM Resto.resto_menus m 
+                        LEFT JOIN Resto.resto_menu_photos p 
+                        ON m.reme_id = p.remp_reme_id
+                        
+                        ORDER BY m.reme_id;",
+
+            //"OFFSET @pageNo ROWS FETCH NEXT @pageSize ROWS ONLY",
+            CommandType = CommandType.Text,
                 CommandParameters = new SqlCommandParameterModel[] {
                     new SqlCommandParameterModel() {
                             ParameterName = "@pageNo",

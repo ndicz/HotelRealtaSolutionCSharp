@@ -20,5 +20,8 @@ namespace Realta.Contract.Models
         public string OrmeIsPaid { get; set; }
         public DateTime OrmeModifiedDate { get; set; }
         public int OrmeUserId { get; set; }
+        public String OrmeStatus { get; set; }
+        public String OrmeInvoice { get; set; }
+
     }
 }

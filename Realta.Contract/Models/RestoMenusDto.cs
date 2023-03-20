@@ -24,7 +24,8 @@ namespace Realta.Contract.Models
 
         public string RemeType { get; set; }
 
-        public string RempUrl { get; set; }
-        public string RempPhotoFilename { get; set; }
+        public string? RempUrl { get; set; }
+        public string? RempPhotoFilename { get; set; }
+        public int OrmeId { get; set; }
     }
 }

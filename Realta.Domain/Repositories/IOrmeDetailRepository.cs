@@ -1,4 +1,5 @@
-﻿using Realta.Domain.Entities;
+﻿using Realta.Domain.Dto;
+using Realta.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,8 @@ namespace Realta.Domain.Repositories
         IEnumerable<OrmeDetail> FindAllOrmeDetail();
         Task<IEnumerable<OrmeDetail>> FindAllOrmeDetailAsync();
         OrmeDetail FindOrmeDetailById(int id);
-        void Insert(OrmeDetail ormeDetail);
-        void Edit(OrmeDetail ormeDetail);
+        void Insert(NewOrderMenusDto orderMenusDto);
+        void Edit(NewOrderMenusDto ormeDetail);
         void Remove(OrmeDetail ormeDetail);
         IEnumerable<OrmeDetail> FindLastOrmeDetailId();
     }

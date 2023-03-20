@@ -28,5 +28,8 @@ namespace Realta.Domain.Entities
         public string OrmeIsPaid { get; set; }
         public DateTime OrmeModifiedDate { get; set; }
         public int OrmeUserId { get; set; }
+        public String OrmeStatus { get; set; }
+
+        public string OrmeInvoice { get; set; }
     }
 }

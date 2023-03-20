@@ -17,7 +17,12 @@ namespace Realta.Persistence.Repositories.RepositoryExtensions
             if (string.IsNullOrEmpty(searchTerm))
                 return restoMenus;
             var lowerCaseSearchTerm = searchTerm.Trim().ToLower();
-            return restoMenus.Where(p => p.RemeName.ToLower().Contains(lowerCaseSearchTerm));
+            return restoMenus.Where(p =>
+            p.RemeName.ToLower().Contains(lowerCaseSearchTerm) ||
+            p.RemeStatus.ToLower().Contains(lowerCaseSearchTerm) ||
+            p.RemePrice.ToString().Contains(lowerCaseSearchTerm)
+
+            );
 
         }
         public static IQueryable<RestoMenus> Sort(this IQueryable<RestoMenus> restoMenus, string orderByQueryString)

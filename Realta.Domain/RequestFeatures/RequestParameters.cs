@@ -12,7 +12,7 @@ namespace Realta.Domain.RequestFeatures
         public int PageNumber { get; set; } = 1;
 
         // jumlah data yang akan di fetch
-        private int _pageSize = 10;
+        private int _pageSize = 8;
         public int PageSize
         {
             get

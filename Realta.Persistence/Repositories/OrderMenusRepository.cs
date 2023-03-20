@@ -101,7 +101,10 @@ namespace Realta.Persistence.Repositories
 
         public IEnumerable<OrderMenus> FindAllOrderMenus()
         {
-            IEnumerator<OrderMenus> dataSet = FindAll<OrderMenus>("SELECT  * From Resto.order_menus");
+            IEnumerator<OrderMenus> dataSet = FindAll<OrderMenus>(@"SELECT orme_id OrmeId, orme_order_number OrmeOrderNumber, orme_order_date OrmeOrderDate,
+                orme_total_item OrmeTotalItem, orme_total_discount OrmeTotalDiscount, orme_total_amount OrmeTotalAmount,
+                    orme_pay_type OrmePayType, orme_cardnumber OrmeCardnumber, orme_is_paid OrmeIsPaid, orme_modified_date OrmeModifiedDate, orme_status OrmeStatus,
+            orme_user_id OrmeUserId, orme_Invoice OrmeInvoice from resto.order_menus");
 
             while (dataSet.MoveNext())
             {
@@ -251,6 +254,7 @@ namespace Realta.Persistence.Repositories
                 yield return data;
             }
         }
+
 
         public OrderMenusNestedMenusDetail GetOrmeNestedMenuDetail(int id)
         {
